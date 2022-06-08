@@ -5,6 +5,6 @@ import io.reactivex.Single
 
 interface FeedsRepository : BaseRepository {
 
-    fun getFeeds(): Single<MutableList<Feed>>
+    fun getFeeds(aircraft: String, destination: String, company: String): Single<MutableList<Feed>>
 
 }

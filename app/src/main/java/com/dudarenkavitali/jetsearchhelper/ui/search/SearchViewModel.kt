@@ -21,16 +21,9 @@ class SearchViewModel : BaseViewModel<MainRouter>() {
     val feedsData = MutableLiveData<MutableList<Feed>>()
 
     fun searchFeeds(aircraft: String, destination: String, company: String) {
-        val disposable = searchUseCase.getFeeds().subscribeBy(
+        val disposable = searchUseCase.getFeeds(aircraft, destination, company).subscribeBy(
             onSuccess = {
-                val filteredList = mutableListOf<Feed>()
-                if (aircraft.isNotEmpty())
-                    filteredList.addAll(it.filter { feed -> feed.airCraft.contains(aircraft) })
-                if (destination.isNotEmpty())
-                    filteredList.addAll(it.filter { feed -> feed.to.contains(destination) })
-                if (company.isNotEmpty())
-                    filteredList.addAll(it.filter { feed -> feed.airCompany.contains(company) })
-                feedsData.postValue(filteredList)
+                feedsData.postValue(it)
             },
             onError = {
                 val i = 0

@@ -11,8 +11,8 @@ class SearchUseCase @Inject constructor(
     private val feedsRepository: FeedsRepository
 ) : BaseUseCase(postExecutorThread) {
 
-    fun getFeeds(): Single<MutableList<Feed>> {
-        return feedsRepository.getFeeds().observeOn(postExecutorThread)
+    fun getFeeds(aircraft: String, destination: String, company: String): Single<MutableList<Feed>> {
+        return feedsRepository.getFeeds(aircraft, destination, company).observeOn(postExecutorThread)
             .subscribeOn(workExecutorThread)
     }
 

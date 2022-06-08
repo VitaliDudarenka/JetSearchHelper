@@ -60,7 +60,7 @@ class RestService(private val apiUrl: String) {
             estimated,
             maxage,
             gliders,
-            stats
+            stats, System.currentTimeMillis()
         ).compose(restParser.parseError())
     }
 

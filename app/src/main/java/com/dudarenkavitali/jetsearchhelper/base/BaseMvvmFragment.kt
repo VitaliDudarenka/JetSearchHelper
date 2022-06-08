@@ -10,20 +10,11 @@ abstract class BaseMvvmFragment <VM : BaseViewModel<R>, R : BaseRouter<*>> : Bas
 
     protected lateinit var viewModel: VM
     abstract fun provideViewModel(): VM
-    abstract fun provideLayoutId(): Int
     protected var router: R? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         viewModel = provideViewModel()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(provideLayoutId(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
